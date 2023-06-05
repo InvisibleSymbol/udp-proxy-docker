@@ -10,5 +10,5 @@ PORT="$2"
 
 LISTEN_PORT=${LISTEN_PORT:-${PORT}}
 
-echo "relay TCP/IP connections on :${LISTEN_PORT} to ${HOST}:${PORT}"
-exec socat TCP-LISTEN:${LISTEN_PORT},fork,reuseaddr TCP:${HOST}:${PORT}
+echo "relay UDP/IP connections on :${LISTEN_PORT} to ${HOST}:${PORT}"
+exec socat UDP4-RECVFROM:${LISTEN_PORT},fork,reuseaddr UDP4-SENDTO:${HOST}:${PORT}
